@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+:root {
+  --forest: #1f4d36;
+  --forest-dark: #163828;
+  --forest-light: #2a6b4a;
+  --honey: #d4a017;
+  --honey-dark: #b8860e;
+  --honey-light: #e4b52e;
+  --cream: #fff8ec;
+  --cream-dark: #f5ead6;
+  --charcoal: #222222;
+  --light-gray: #f6f6f6;
+  --white: #ffffff;
+  --background: var(--cream);
+  --foreground: var(--charcoal);
+  --muted: #6b6b6b;
+  --border: #e8e0d4;
+  --ring: var(--honey);
+}
+
+@theme inline {
+  --color-forest: var(--forest);
+  --color-forest-dark: var(--forest-dark);
+  --color-forest-light: var(--forest-light);
+  --color-honey: var(--honey);
+  --color-honey-dark: var(--honey-dark);
+  --color-honey-light: var(--honey-light);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-charcoal: var(--charcoal);
+  --color-light-gray: var(--light-gray);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+  --animate-accordion-down: accordion-down 0.25s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-playfair), Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--honey) 35%, transparent);
+  color: var(--charcoal);
+}
+
+:focus-visible {
+  outline: 2px solid var(--honey);
+  outline-offset: 3px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-light {
+  background: rgba(255, 248, 236, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(31, 77, 54, 0.08);
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.masonry {
+  columns: 1;
+  column-gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .masonry {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry {
+    columns: 3;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+}
+
+.animate-scroll-indicator {
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+.animate-accordion-down {
+  animation: accordion-down 0.25s ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
