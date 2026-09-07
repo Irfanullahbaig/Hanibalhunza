@@ -86,10 +86,8 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: siteConfig.name,
-  alternateName: siteConfig.nameUrdu,
   url: siteConfig.url,
   description: siteConfig.description,
-  email: siteConfig.email,
   telephone: siteConfig.phone,
   address: {
     "@type": "PostalAddress",

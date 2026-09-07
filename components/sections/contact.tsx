@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
-  Mail,
   MapPin,
   MessageCircle,
   Phone,
@@ -138,22 +137,12 @@ export function ContactSection() {
           <Reveal delay={0.15} className="space-y-6">
             <div className="space-y-4 rounded-2xl bg-forest p-6 text-cream sm:p-8">
               <a
-                href={`mailto:${siteConfig.email}`}
-                className="flex items-start gap-3 transition hover:text-honey"
-              >
-                <Mail className="mt-0.5 h-5 w-5 text-honey" />
-                <div>
-                  <p className="text-sm text-cream/60">Email</p>
-                  <p>{siteConfig.email}</p>
-                </div>
-              </a>
-              <a
                 href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
                 className="flex items-start gap-3 transition hover:text-honey"
               >
                 <Phone className="mt-0.5 h-5 w-5 text-honey" />
                 <div>
-                  <p className="text-sm text-cream/60">Phone</p>
+                  <p className="text-sm text-cream/60">Phone / WhatsApp</p>
                   <p>{siteConfig.phone}</p>
                 </div>
               </a>

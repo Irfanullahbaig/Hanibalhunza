@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/lib/data";
 import {
   FacebookIcon,
@@ -106,15 +106,6 @@ export function Footer() {
               >
                 <Phone className="h-4 w-4 shrink-0 text-honey" />
                 {siteConfig.phone}
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="flex gap-2 transition hover:text-honey"
-              >
-                <Mail className="h-4 w-4 shrink-0 text-honey" />
-                {siteConfig.email}
               </a>
             </li>
           </ul>

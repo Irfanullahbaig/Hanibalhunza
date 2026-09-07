@@ -27,8 +27,12 @@ export default function PrivacyPage() {
         </p>
         <p className="text-muted">
           We do not sell personal data. Payment processing, when enabled, is
-          handled by trusted third-party providers. For questions, contact{" "}
-          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+          handled by trusted third-party providers. For questions, contact us on
+          WhatsApp or call{" "}
+          <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}>
+            {siteConfig.phone}
+          </a>
+          .
         </p>
       </div>
     </section>

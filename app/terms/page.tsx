@@ -27,12 +27,12 @@ export default function TermsPage() {
           policies outlined in our FAQ and contact channels.
         </p>
         <p className="mt-4 leading-relaxed text-muted">
-          For legal inquiries, email{" "}
+          For legal inquiries, contact us on WhatsApp or call{" "}
           <a
-            href={`mailto:${siteConfig.email}`}
+            href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
             className="text-forest underline"
           >
-            {siteConfig.email}
+            {siteConfig.phone}
           </a>
           .
         </p>

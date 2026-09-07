@@ -6,7 +6,6 @@ import { ChevronDown } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/data";
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -60,17 +59,6 @@ export function HeroSection() {
             Hunza Organic{" "}
             <span className="text-honey">Shilajit</span>
           </motion.h1>
-
-          <motion.p
-            lang="ur"
-            dir="rtl"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.28 }}
-            className="mt-3 font-urdu text-xl text-honey sm:text-2xl"
-          >
-            {siteConfig.nameUrdu}
-          </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}

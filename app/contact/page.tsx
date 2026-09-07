@@ -6,7 +6,7 @@ import { Newsletter } from "@/components/sections/newsletter";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact Haniball Hunza for orders, wholesale inquiries, and customer support. WhatsApp, email, and phone available.",
+    "Contact Haniball Hunza for orders, wholesale inquiries, and customer support. WhatsApp and phone available.",
   alternates: { canonical: "/contact" },
 };
 

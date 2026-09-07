@@ -10,15 +10,12 @@ import type {
 
 export const siteConfig = {
   name: "Haniball Hunza",
-  nameUrdu: "ہنی بال ہنزہ",
   tagline: "Premium Dry Fruits from the Mountains of Hunza",
-  taglineUrdu: "سب کو پسند ہے",
   description:
     "Premium organic dry fruits, Hunzai chocolate, and Hunza organic shilajit—sourced from the pristine valleys of Hunza for authentic taste, purity, and wellness.",
   url: "https://haniballhunza.com",
-  email: "hello@haniballhunza.com",
-  phone: "+92 300 1234567",
-  whatsapp: "923001234567",
+  phone: "+92 3555380038",
+  whatsapp: "923555380038",
   address: "Karimabad, Hunza Valley, Gilgit-Baltistan, Pakistan",
   social: {
     instagram: "https://instagram.com/haniballhunza",
@@ -358,7 +355,7 @@ export const faqs: FAQ[] = [
     id: "5",
     question: "Do you deliver nationwide?",
     answer:
-      "Yes. We deliver across Pakistan via trusted courier partners. International shipping is available on select products—reach out via WhatsApp or email for a custom quote.",
+      "Yes. We deliver across Pakistan via trusted courier partners. International shipping is available on select products—reach out via WhatsApp for a custom quote.",
     category: "delivery",
   },
   {
