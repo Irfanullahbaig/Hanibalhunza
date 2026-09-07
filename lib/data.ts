@@ -10,7 +10,9 @@ import type {
 
 export const siteConfig = {
   name: "Haniball Hunza",
+  nameUrdu: "ہنی بال ہنزہ",
   tagline: "Premium Dry Fruits from the Mountains of Hunza",
+  taglineUrdu: "سب کو پسند ہے",
   description:
     "Premium organic dry fruits, Hunzai chocolate, and Hunza organic shilajit—sourced from the pristine valleys of Hunza for authentic taste, purity, and wellness.",
   url: "https://haniballhunza.com",
@@ -47,9 +49,8 @@ export const categories: Category[] = [
     id: "2",
     slug: "dry-almonds",
     name: "Dry Almonds",
-    description: "Crunchy mountain almonds packed with nutrition",
-    image:
-      "https://images.unsplash.com/photo-1508747703725-719777637510?w=800&q=80",
+    description: "100% organic Hunza almonds — pure, crunchy & nutrient-rich",
+    image: "/images/dry-almond.jpg",
   },
   {
     id: "3",
@@ -119,16 +120,15 @@ export const products: Product[] = [
     id: "3",
     slug: "dry-almond",
     name: "Dry Almond",
-    shortDescription: "Crunchy, nutrient-rich mountain almonds",
+    shortDescription: "100% organic Hunza almonds — pure, crunchy & nutrient-rich",
     description:
-      "Premium dry almonds sourced for quality and freshness. Crisp texture, clean taste, and packed with natural goodness—ideal for daily snacking, trail mixes, and kitchen use.",
+      "Unlock the golden secret of the Himalayas. 100% organic Hunza almonds—pure, crunchy, and nutrient-rich. Chemical-free with no added sugar. Rich in Vitamin E, magnesium, protein, fiber, and healthy fats. Heart-healthy, brain-boosting natural energy from the pristine valleys of Hunza.",
     price: 2199,
     compareAtPrice: 2599,
     weight: "500g",
     rating: 4.9,
     reviewCount: 118,
-    image:
-      "https://images.unsplash.com/photo-1508747703725-719777637510?w=800&q=80",
+    image: "/images/dry-almond.jpg",
     category: "dry-almonds",
     badge: "20% OFF",
     featured: true,
@@ -177,37 +177,39 @@ export const products: Product[] = [
   {
     id: "6",
     slug: "mixed-mountain-dry-fruits",
-    name: "Mixed Mountain Dry Fruits",
-    shortDescription: "A wholesome mix of Hunza dry fruits",
+    name: "Mix Dry Fruits",
+    shortDescription: "Almond, apricot, walnut, cashew & raisin — nature’s best blend",
     description:
-      "An everyday mix of premium dry fruits selected for taste and nutrition. Perfect for family snacking and energy on the go.",
+      "Unlock the golden secret of the Himalayas. 100% organic mix dry fruits—almond, apricot, walnut, cashew, and raisin. No added sugar, chemical-free, and rich in nutrients. A perfect blend packed with vitamins, minerals, natural energy, and brain-supporting goodness for the whole family.",
     price: 2799,
+    compareAtPrice: 3299,
     weight: "750g",
     rating: 4.7,
     reviewCount: 63,
-    image:
-      "https://images.unsplash.com/photo-1599599810769-d37b6f796a1a?w=800&q=80",
+    image: "/images/mix-dry-fruits.jpg",
     category: "dry-apricots",
-    featured: false,
+    badge: "Bestseller",
+    featured: true,
     bestseller: true,
     inStock: true,
   },
   {
     id: "7",
     slug: "premium-walnut-kernels",
-    name: "Premium Walnut Kernels",
-    shortDescription: "Fresh, crunchy walnut kernels from the north",
+    name: "Hunza Walnuts",
+    shortDescription: "100% organic premium kernels — rich in Omega-3",
     description:
-      "Carefully shelled walnut kernels with a rich, buttery finish. A classic Hunza pantry essential for health-conscious homes.",
+      "Unlock the golden secret of the Himalayas. 100% organic Hunza walnuts—premium kernels rich in Omega-3. Pure, crunchy, and nutrient-rich with no added preservatives. Supports brain health, heart health, memory, and focus. A nutritious snack for kids, adults, and the whole family.",
     price: 2399,
+    compareAtPrice: 2799,
     weight: "500g",
     rating: 4.8,
     reviewCount: 81,
-    image:
-      "https://images.unsplash.com/photo-1606923829579-0fdccb9bf114?w=800&q=80",
+    image: "/images/hunza-walnuts.jpg",
     category: "dry-almonds",
+    badge: "Premium",
     featured: true,
-    bestseller: false,
+    bestseller: true,
     inStock: true,
   },
   {
@@ -383,8 +385,8 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: "3",
-    src: "https://images.unsplash.com/photo-1508747703725-719777637510?w=800&q=80",
-    alt: "Premium dry almonds",
+    src: "/images/dry-almond.jpg",
+    alt: "Haniball Hunza dried almonds — 100% organic pouch",
     span: "normal",
   },
   {
@@ -395,14 +397,14 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: "5",
-    src: "https://images.unsplash.com/photo-1599599810769-d37b6f796a1a?w=800&q=80",
-    alt: "Assorted mountain dry fruits",
+    src: "/images/mix-dry-fruits.jpg",
+    alt: "Haniball Hunza 100% organic mix dry fruits",
     span: "tall",
   },
   {
     id: "6",
-    src: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&q=80",
-    alt: "Premium gift packaging",
+    src: "/images/hunza-walnuts.jpg",
+    alt: "Haniball Hunza organic walnuts — premium Omega-3 kernels",
     span: "normal",
   },
   {

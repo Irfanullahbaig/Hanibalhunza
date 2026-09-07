@@ -6,6 +6,7 @@ import {
   InstagramIcon,
   XIcon,
 } from "@/components/ui/social-icons";
+import { BrandMark } from "@/components/layout/brand-mark";
 
 const columns = [
   {
@@ -43,10 +44,8 @@ export function Footer() {
     <footer className="bg-forest text-cream" role="contentinfo">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-4">
-          <Link href="/" className="font-serif text-2xl tracking-wide text-cream">
-            Haniball Hunza
-          </Link>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
+          <BrandMark size="lg" />
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70" lang="en">
             {siteConfig.tagline}. Sourced with care from the pristine valleys of
             Hunza—authentic dry fruits, chocolate, and shilajit in every order.
           </p>

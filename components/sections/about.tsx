@@ -28,8 +28,8 @@ export function AboutSection() {
             <div className="absolute -bottom-6 -right-4 hidden w-48 overflow-hidden rounded-xl shadow-2xl sm:block lg:-right-8">
               <div className="relative aspect-square">
                 <Image
-                  src="https://images.unsplash.com/photo-1508747703725-719777637510?w=400&q=80"
-                  alt="Premium dry almonds from Hunza"
+                  src="/images/dry-almond.jpg"
+                  alt="Haniball Hunza organic dried almonds"
                   fill
                   sizes="200px"
                   className="object-cover"

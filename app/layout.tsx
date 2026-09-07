@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Noto_Nastaliq_Urdu, Playfair_Display } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
@@ -17,6 +17,13 @@ const inter = Inter({
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+const notoUrdu = Noto_Nastaliq_Urdu({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-noto-urdu",
   display: "swap",
 });
 
@@ -58,9 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description: siteConfig.description,
-    images: [
-      "https://haniballhunza.com/images/hunza-shilajit.png",
-    ],
+    images: ["https://haniballhunza.com/images/hunza-shilajit.png"],
   },
   robots: {
     index: true,
@@ -81,6 +86,7 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: siteConfig.name,
+  alternateName: siteConfig.nameUrdu,
   url: siteConfig.url,
   description: siteConfig.description,
   email: siteConfig.email,
@@ -104,7 +110,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfair.variable} ${notoUrdu.variable}`}
+    >
       <body className="min-h-screen bg-cream font-sans text-charcoal antialiased">
         <JsonLd data={organizationSchema} />
         <CartProvider>
@@ -115,7 +124,9 @@ export default function RootLayout({
             Skip to main content
           </a>
           <Navbar />
-          <main id="main-content">{children}</main>
+          <main id="main-content" lang="en">
+            {children}
+          </main>
           <Footer />
           <WhatsAppFloat />
         </CartProvider>

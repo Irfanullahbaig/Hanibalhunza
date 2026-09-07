@@ -37,6 +37,7 @@
   --color-ring: var(--ring);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
+  --font-urdu: var(--font-noto-urdu);
   --animate-accordion-down: accordion-down 0.25s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 }
@@ -61,6 +62,10 @@ h5,
 h6 {
   font-family: var(--font-playfair), Georgia, serif;
   letter-spacing: -0.02em;
+}
+
+.font-urdu {
+  font-family: var(--font-urdu), "Noto Nastaliq Urdu", serif;
 }
 
 ::selection {

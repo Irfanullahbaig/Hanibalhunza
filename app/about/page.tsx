@@ -59,8 +59,8 @@ export default function AboutPage() {
           <Reveal delay={0.15}>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1599599810769-d37b6f796a1a?w=900&q=80"
-                alt="Assorted Hunza dry fruits"
+                src="/images/mix-dry-fruits.jpg"
+                alt="Haniball Hunza organic mix dry fruits"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

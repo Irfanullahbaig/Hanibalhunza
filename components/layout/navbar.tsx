@@ -15,6 +15,7 @@ import { navItems, siteConfig } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { useScrolled } from "@/hooks/use-scrolled";
 import { useCart } from "@/hooks/use-cart";
+import { BrandMark } from "@/components/layout/brand-mark";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
@@ -33,22 +34,12 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="group flex flex-col"
-          aria-label={`${siteConfig.name} home`}
-        >
-          <span className="font-serif text-xl tracking-wide text-cream transition group-hover:text-honey sm:text-2xl">
-            Haniball Hunza
-          </span>
-          <span className="hidden text-[10px] uppercase tracking-[0.2em] text-cream/70 sm:block">
-            Pure Mountain Dry Fruits
-          </span>
-        </Link>
+        <BrandMark size="md" />
 
         <nav
           className="hidden items-center gap-7 lg:flex"
           aria-label="Primary"
+          lang="en"
         >
           {navItems.map((item) => (
             <Link
