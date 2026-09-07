@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, ShoppingBag, Star } from "lucide-react";
+import { MessageCircle, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Product } from "@/types";
 import { formatPrice, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/hooks/use-cart";
+import { siteConfig } from "@/lib/data";
 
 type ProductCardProps = {
   product: Product;
@@ -15,8 +15,10 @@ type ProductCardProps = {
 };
 
 export function ProductCard({ product, className }: ProductCardProps) {
-  const { addItem, toggleWishlist, isWishlisted } = useCart();
-  const wishlisted = isWishlisted(product.id);
+  const message = encodeURIComponent(
+    `Hello Haniball Hunza! I'd like to order:\n\n• ${product.name} (${product.weight})\n• Price: ${formatPrice(product.price)}\n\nPlease confirm availability. Thank you!`
+  );
+  const whatsappHref = `https://wa.me/${siteConfig.whatsapp}?text=${message}`;
 
   return (
     <motion.article
@@ -33,41 +35,18 @@ export function ProductCard({ product, className }: ProductCardProps) {
         </span>
       )}
 
-      <button
-        type="button"
-        aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-        onClick={() => toggleWishlist(product.id)}
-        className="absolute right-3 top-3 z-10 rounded-full bg-white/90 p-2 shadow-sm transition hover:scale-110"
+      <Link
+        href={`/shop/${product.slug}`}
+        className="relative aspect-[4/5] overflow-hidden bg-light-gray"
       >
-        <Heart
-          className={cn(
-            "h-4 w-4 transition-colors",
-            wishlisted ? "fill-honey text-honey" : "text-charcoal"
-          )}
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-      </button>
-
-      <div className="relative aspect-[4/5] overflow-hidden bg-light-gray">
-        <Link href={`/shop/${product.slug}`} className="absolute inset-0">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-        </Link>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-forest/90 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto">
-          <Button
-            size="sm"
-            className="w-full"
-            onClick={() => addItem(product)}
-          >
-            <ShoppingBag className="h-4 w-4" />
-            Quick Add
-          </Button>
-        </div>
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col gap-2 p-5">
         <div className="flex items-center gap-1 text-honey">
@@ -112,14 +91,16 @@ export function ProductCard({ product, className }: ProductCardProps) {
               </span>
             )}
           </div>
-          <Button
-            size="sm"
-            variant="forest"
-            aria-label={`Add ${product.name} to cart`}
-            onClick={() => addItem(product)}
-          >
-            <ShoppingBag className="h-4 w-4" />
-            Add
+          <Button asChild size="sm" variant="forest">
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Order ${product.name} on WhatsApp`}
+            >
+              <MessageCircle className="h-4 w-4" />
+              Order Now
+            </a>
           </Button>
         </div>
       </div>

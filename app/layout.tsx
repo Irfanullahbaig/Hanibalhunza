@@ -3,7 +3,6 @@ import { Inter, Noto_Nastaliq_Urdu, Playfair_Display } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
-import { CartProvider } from "@/hooks/use-cart";
 import { siteConfig } from "@/lib/data";
 import { JsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
@@ -114,20 +113,18 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-cream font-sans text-charcoal antialiased">
         <JsonLd data={organizationSchema} />
-        <CartProvider>
-          <a
-            href="#main-content"
-            className="absolute left-4 top-4 z-[100] -translate-y-16 rounded-md bg-honey px-4 py-2 text-sm font-medium text-charcoal transition focus:translate-y-0"
-          >
-            Skip to main content
-          </a>
-          <Navbar />
-          <main id="main-content" lang="en">
-            {children}
-          </main>
-          <Footer />
-          <WhatsAppFloat />
-        </CartProvider>
+        <a
+          href="#main-content"
+          className="absolute left-4 top-4 z-[100] -translate-y-16 rounded-md bg-honey px-4 py-2 text-sm font-medium text-charcoal transition focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
+        <Navbar />
+        <main id="main-content" lang="en">
+          {children}
+        </main>
+        <Footer />
+        <WhatsAppFloat />
       </body>
     </html>
   );

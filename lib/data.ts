@@ -406,8 +406,8 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: "7",
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-    alt: "Pristine Hunza peaks",
+    src: "/images/hunza-valley.jpg",
+    alt: "Hunza Valley mountain landscape with evergreen forests",
     span: "wide",
   },
   {

@@ -1,35 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
-import {
-  Heart,
-  Menu,
-  Search,
-  ShoppingBag,
-  User,
-  X,
-} from "lucide-react";
+import { Menu, MessageCircle, Search, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navItems, siteConfig } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { useScrolled } from "@/hooks/use-scrolled";
-import { useCart } from "@/hooks/use-cart";
 import { BrandMark } from "@/components/layout/brand-mark";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const scrolled = useScrolled(50);
-  const { count, wishlist } = useCart();
+  const solid = !isHome || scrolled;
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+
+  const whatsappHref = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
+    "Hello Haniball Hunza! I'd like to place an order."
+  )}`;
 
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled
-          ? "bg-forest/95 py-3 shadow-lg backdrop-blur-md"
+        solid
+          ? "bg-forest py-3 shadow-lg backdrop-blur-md"
           : "bg-transparent py-5"
       )}
     >
@@ -62,43 +61,11 @@ export function Navbar() {
           >
             <Search className="h-5 w-5" />
           </Button>
-          <Link
-            href="/shop"
-            aria-label={`Wishlist, ${wishlist.length} items`}
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-md text-cream transition hover:bg-white/10 hover:text-honey"
-          >
-            <Heart className="h-5 w-5" />
-            {wishlist.length > 0 && (
-              <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-honey text-[10px] font-bold text-charcoal">
-                {wishlist.length}
-              </span>
-            )}
-          </Link>
-          <Link
-            href="/shop"
-            aria-label={`Shopping cart, ${count} items`}
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-md text-cream transition hover:bg-white/10 hover:text-honey"
-          >
-            <ShoppingBag className="h-5 w-5" />
-            {count > 0 && (
-              <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-honey text-[10px] font-bold text-charcoal">
-                {count}
-              </span>
-            )}
-          </Link>
-          <Link
-            href="/contact"
-            aria-label="User account"
-            className="hidden h-10 w-10 items-center justify-center rounded-md text-cream transition hover:bg-white/10 hover:text-honey sm:inline-flex"
-          >
-            <User className="h-5 w-5" />
-          </Link>
-          <Button
-            asChild
-            size="sm"
-            className="ml-1 hidden md:inline-flex"
-          >
-            <Link href="/shop">Shop Now</Link>
+          <Button asChild size="sm" className="ml-1 hidden md:inline-flex">
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="h-4 w-4" />
+              Order Now
+            </a>
           </Button>
           <Button
             variant="ghost"
@@ -119,7 +86,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="border-t border-white/10 bg-forest/95 px-4 py-3 backdrop-blur-md"
+            className="border-t border-white/10 bg-forest px-4 py-3 backdrop-blur-md"
           >
             <form
               action="/shop"
@@ -161,9 +128,15 @@ export function Navbar() {
                 </Link>
               ))}
               <Button asChild className="mt-2">
-                <Link href="/shop" onClick={() => setOpen(false)}>
-                  Shop Now
-                </Link>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Order Now
+                </a>
               </Button>
             </div>
           </motion.nav>

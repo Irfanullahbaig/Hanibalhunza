@@ -1,39 +1,24 @@
 "use client";
 
-import { Heart, ShoppingBag } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import type { Product } from "@/types";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/hooks/use-cart";
-import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/data";
+import { formatPrice } from "@/lib/utils";
 
 export function ProductActions({ product }: { product: Product }) {
-  const { addItem, toggleWishlist, isWishlisted } = useCart();
-  const wishlisted = isWishlisted(product.id);
+  const message = encodeURIComponent(
+    `Hello Haniball Hunza! I'd like to order:\n\n• ${product.name} (${product.weight})\n• Price: ${formatPrice(product.price)}\n\nPlease confirm availability. Thank you!`
+  );
+  const whatsappHref = `https://wa.me/${siteConfig.whatsapp}?text=${message}`;
 
   return (
-    <div className="mt-8 flex flex-wrap gap-3">
-      <Button
-        size="lg"
-        variant="forest"
-        onClick={() => addItem(product)}
-        className="min-w-[180px]"
-      >
-        <ShoppingBag className="h-5 w-5" />
-        Add to Cart
-      </Button>
-      <Button
-        size="lg"
-        variant="outline-dark"
-        onClick={() => toggleWishlist(product.id)}
-        aria-pressed={wishlisted}
-      >
-        <Heart
-          className={cn(
-            "h-5 w-5",
-            wishlisted && "fill-honey text-honey"
-          )}
-        />
-        {wishlisted ? "Wishlisted" : "Wishlist"}
+    <div className="mt-8">
+      <Button asChild size="lg" variant="forest" className="min-w-[220px]">
+        <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+          <MessageCircle className="h-5 w-5" />
+          Order Now
+        </a>
       </Button>
     </div>
   );

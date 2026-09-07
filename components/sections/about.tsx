@@ -18,8 +18,8 @@ export function AboutSection() {
           <div className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=80"
-                alt="Mountain landscape of Hunza Valley"
+                src="/images/mix-dry-fruits.jpg"
+                alt="Haniball Hunza organic mix dry fruits"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
