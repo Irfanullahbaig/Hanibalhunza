@@ -1,59 +1,38 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { products } from "@/lib/data";
-import { ProductCard } from "@/components/products/product-card";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/reveal";
-import { Newsletter } from "@/components/sections/newsletter";
+import { getCategory } from "@/lib/data";
+import { PageHeader } from "@/components/ui/page-header";
+import { Catalog, type CatalogParams } from "@/components/shop/catalog";
 
-export const metadata: Metadata = {
-  title: "Shop",
-  description:
-    "Shop premium Hunza dry fruits—Dry Apricot, Dry Almond, Hunzai Chocolate, Organic Shilajit, and curated gift boxes.",
-  alternates: { canonical: "/shop" },
-};
+type Props = { searchParams: Promise<CatalogParams> };
 
-export default function ShopPage() {
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const { category } = await searchParams;
+  const cat = category ? getCategory(category) : undefined;
+  return {
+    title: cat ? cat.name : "Shop Dried Fruits & Nuts",
+    description: cat
+      ? `${cat.description}. Shop ${cat.name.toLowerCase()} from Hunza Valley with nationwide delivery.`
+      : "Shop Hunza dried apricots, almonds, walnuts, Kilawo, shilajit and gift sets with nationwide delivery across Pakistan.",
+    alternates: { canonical: cat ? `/shop?category=${cat.slug}` : "/shop" },
+  };
+}
+
+export default async function ShopPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const cat = params.category ? getCategory(params.category) : undefined;
+
   return (
     <>
-      <section className="bg-forest pb-16 pt-32 text-cream">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav aria-label="Breadcrumb" className="mb-6 text-sm text-cream/60">
-            <ol className="flex gap-2">
-              <li>
-                <Link href="/" className="hover:text-honey">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li className="text-honey">Shop</li>
-            </ol>
-          </nav>
-          <h1 className="font-serif text-4xl sm:text-5xl">Shop All Products</h1>
-          <p className="mt-4 max-w-xl text-cream/70">
-            Discover our full collection of mountain dry fruits, Hunzai
-            chocolate, and organic shilajit—sourced with care and delivered
-            nationwide.
-          </p>
-        </div>
-      </section>
-
-      <section className="bg-cream py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <p className="mb-8 text-sm text-muted">
-              Showing {products.length} products
-            </p>
-          </Reveal>
-          <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map((product) => (
-              <StaggerItem key={product.id}>
-                <ProductCard product={product} />
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-      <Newsletter />
+      <PageHeader
+        crumbs={[{ label: "Home", href: "/" }, { label: "Shop" }]}
+        title={cat ? cat.name : "Shop the harvest"}
+        description={
+          cat
+            ? `${cat.description}.`
+            : "Dried fruits, nuts and Hunza specialties, packed fresh and delivered across Pakistan."
+        }
+      />
+      <Catalog key={params.category ?? "all"} initial={params} />
     </>
   );
 }

@@ -7,42 +7,32 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Reveal } from "@/components/ui/reveal";
 
 export function FAQSection() {
   return (
-    <section
-      id="faq"
-      className="bg-white py-20 sm:py-28"
-      aria-labelledby="faq-heading"
-    >
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="mb-12 text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-honey">
-            Support
-          </p>
-          <h2
-            id="faq-heading"
-            className="mt-3 font-serif text-3xl text-charcoal sm:text-4xl"
-          >
-            Questions about Haniball Hunza?
+    <section id="faq" className="scroll-mt-20 bg-ivory py-16 sm:py-24" aria-labelledby="faq-heading">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div className="lg:col-span-4">
+          <p className="eyebrow">FAQ</p>
+          <h2 id="faq-heading" className="mt-3 text-3xl leading-tight text-ink sm:text-4xl">
+            Questions, answered
           </h2>
           <p className="mt-4 text-muted">
-            Answers on shipping, purity, storage, returns, and delivery for our
-            dry fruits and wellness products.
+            Can&rsquo;t find what you need?{" "}
+            <a href="/contact" className="text-forest underline underline-offset-4">
+              Get in touch
+            </a>
+            .
           </p>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq) => (
-              <AccordionItem key={faq.id} value={faq.id}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </Reveal>
+        </div>
+        <Accordion type="single" collapsible className="border-t border-line lg:col-span-8">
+          {faqs.map((faq) => (
+            <AccordionItem key={faq.id} value={faq.id}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </section>
   );

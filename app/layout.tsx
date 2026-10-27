@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Nastaliq_Urdu, Playfair_Display } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
 import { siteConfig } from "@/lib/data";
 import { JsonLd } from "@/components/seo/json-ld";
+import { CartProvider } from "@/hooks/use-cart";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,17 +14,11 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-fraunces",
   display: "swap",
-});
-
-const notoUrdu = Noto_Nastaliq_Urdu({
-  subsets: ["arabic"],
-  weight: ["400", "700"],
-  variable: "--font-noto-urdu",
-  display: "swap",
+  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -35,12 +30,12 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     "Hunza dry fruits",
-    "dry apricot Pakistan",
-    "Hunzai chocolate",
+    "Hunza dried apricots",
+    "dry fruits wholesale Pakistan",
+    "bulk almonds walnuts",
+    "Hunzai chocolate Kilawo",
     "Hunza organic shilajit",
-    "dry almonds",
     "Haniball Hunza",
-    "organic dry fruits Hunza",
   ],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
@@ -53,10 +48,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: "https://haniballhunza.com/images/hunza-shilajit.png",
-        width: 1200,
-        height: 630,
-        alt: "Haniball Hunza Organic Shilajit",
+        url: "/images/products/dry-apricot.jpg",
+        width: 720,
+        height: 720,
+        alt: "Haniball Hunza sun-dried apricots",
       },
     ],
   },
@@ -64,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description: siteConfig.description,
-    images: ["https://haniballhunza.com/images/hunza-shilajit.png"],
+    images: ["/images/products/dry-apricot.jpg"],
   },
   robots: {
     index: true,
@@ -107,24 +102,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${playfair.variable} ${notoUrdu.variable}`}
-    >
-      <body className="min-h-screen bg-cream font-sans text-charcoal antialiased">
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+      <body className="min-h-screen bg-ivory font-sans text-ink antialiased">
         <JsonLd data={organizationSchema} />
         <a
           href="#main-content"
-          className="absolute left-4 top-4 z-[100] -translate-y-16 rounded-md bg-honey px-4 py-2 text-sm font-medium text-charcoal transition focus:translate-y-0"
+          className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-md bg-forest px-4 py-2 text-sm font-medium text-ivory transition focus:translate-y-0"
         >
           Skip to main content
         </a>
-        <Navbar />
-        <main id="main-content" lang="en">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppFloat />
+        <CartProvider>
+          <Navbar />
+          <main id="main-content">{children}</main>
+          <Footer />
+          <WhatsAppFloat />
+        </CartProvider>
       </body>
     </html>
   );

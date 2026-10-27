@@ -7,41 +7,44 @@ type BrandMarkProps = {
   className?: string;
   /** Light text for dark backgrounds */
   light?: boolean;
-  size?: "sm" | "md" | "lg";
 };
 
-const sizeMap = {
-  sm: "text-lg sm:text-xl",
-  md: "text-xl sm:text-2xl",
-  lg: "text-2xl sm:text-3xl",
-};
+export function Peaks({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 20" aria-hidden className={className} fill="none">
+      <path
+        d="M1 19 L11 5 L16 11 L21 3 L31 19"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      <circle cx="25" cy="5" r="2" fill="var(--apricot)" />
+    </svg>
+  );
+}
 
-export function BrandMark({
-  href = "/",
-  className,
-  light = true,
-  size = "md",
-}: BrandMarkProps) {
+export function BrandMark({ href = "/", className, light = false }: BrandMarkProps) {
   const content = (
-    <span className={cn("group flex flex-col", className)}>
-      <span
-        className={cn(
-          "font-serif tracking-wide transition",
-          sizeMap[size],
-          light
-            ? "text-cream group-hover:text-honey"
-            : "text-forest group-hover:text-honey-dark"
-        )}
-      >
-        {siteConfig.name}
-      </span>
-      <span
-        className={cn(
-          "hidden text-[10px] uppercase tracking-[0.2em] sm:block",
-          light ? "text-cream/70" : "text-muted"
-        )}
-      >
-        Pure Mountain Dry Fruits
+    <span className={cn("flex items-center gap-2.5", className)}>
+      <Peaks className={cn("h-5 w-8", light ? "text-ivory" : "text-forest")} />
+      <span className="flex flex-col leading-none">
+        <span
+          className={cn(
+            "font-serif text-[19px] tracking-tight sm:text-xl",
+            light ? "text-ivory" : "text-forest"
+          )}
+        >
+          Haniball
+        </span>
+        <span
+          className={cn(
+            "mt-1 text-[9px] font-semibold uppercase tracking-[0.32em]",
+            light ? "text-ivory/60" : "text-muted"
+          )}
+        >
+          Hunza
+        </span>
       </span>
     </span>
   );
@@ -49,11 +52,7 @@ export function BrandMark({
   if (!href) return content;
 
   return (
-    <Link
-      href={href}
-      aria-label={`${siteConfig.name} home`}
-      className="inline-flex"
-    >
+    <Link href={href} aria-label={`${siteConfig.name} home`} className="inline-flex shrink-0">
       {content}
     </Link>
   );

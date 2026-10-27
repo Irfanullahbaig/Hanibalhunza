@@ -1,79 +1,73 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { subscribeNewsletter } from "@/app/actions";
+import { newsletterSchema, type NewsletterValues } from "@/lib/schemas";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Reveal } from "@/components/ui/reveal";
-
-const schema = z.object({
-  email: z.string().email("Enter a valid email address"),
-});
-
-type FormValues = z.infer<typeof schema>;
 
 export function Newsletter() {
+  const [status, setStatus] = useState<{ ok: boolean; message: string } | null>(null);
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-  });
+    formState: { errors, isSubmitting },
+  } = useForm<NewsletterValues>({ resolver: zodResolver(newsletterSchema) });
 
-  const onSubmit = async () => {
-    await new Promise((r) => setTimeout(r, 600));
-    reset();
+  const onSubmit = async (values: NewsletterValues) => {
+    try {
+      const res = await subscribeNewsletter(values);
+      if (res.ok) {
+        reset();
+        setStatus({ ok: true, message: "Thank you—you're on the list for new harvest updates." });
+      } else {
+        setStatus({ ok: false, message: res.error });
+      }
+    } catch {
+      setStatus({ ok: false, message: "Something went wrong. Please try again." });
+    }
   };
 
   return (
-    <section
-      className="relative overflow-hidden bg-forest py-16 sm:py-20"
-      aria-labelledby="newsletter-heading"
-    >
-      <div className="hero-grid absolute inset-0 opacity-30" />
-      <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
-        <Reveal>
-          <h2
-            id="newsletter-heading"
-            className="font-serif text-3xl text-cream sm:text-4xl"
-          >
-            Join the Haniball Family
+    <section className="bg-paper py-16 sm:py-20" aria-labelledby="newsletter-heading">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <div className="max-w-md">
+          <h2 id="newsletter-heading" className="text-3xl text-ink">
+            New harvest, first
           </h2>
-          <p className="mt-4 text-cream/70">
-            Be first to know about new harvests, limited editions, and exclusive
-            offers.
+          <p className="mt-3 text-muted">
+            Seasonal arrivals and limited batches from Hunza, a few times a year.
           </p>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row"
-            noValidate
-          >
-            <Input
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="w-full max-w-md">
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="newsletter-email"
               type="email"
+              autoComplete="email"
               placeholder="Your email address"
-              aria-label="Email for newsletter"
               aria-invalid={!!errors.email}
-              className="border-white/20 bg-white/10 text-cream placeholder:text-cream/50"
+              aria-describedby="newsletter-status"
+              className="h-12 w-full rounded-md border border-line bg-white px-4 text-base text-ink placeholder:text-muted/70 focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/15 sm:text-sm"
               {...register("email")}
             />
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Joining…" : "Subscribe"}
+            <Button type="submit" size="lg" disabled={isSubmitting}>
+              {isSubmitting ? "Subscribing…" : "Subscribe"}
             </Button>
-          </form>
-          {errors.email && (
-            <p className="mt-2 text-sm text-honey" role="alert">
-              {errors.email.message}
-            </p>
-          )}
-          {isSubmitSuccessful && (
-            <p className="mt-2 text-sm text-honey" role="status">
-              Welcome to the family—check your inbox soon.
-            </p>
-          )}
-        </Reveal>
+          </div>
+          <p
+            id="newsletter-status"
+            role={errors.email || status ? "status" : undefined}
+            className={`mt-2 min-h-5 text-sm ${errors.email || (status && !status.ok) ? "text-danger" : "text-forest"}`}
+          >
+            {errors.email?.message ?? status?.message}
+          </p>
+        </form>
       </div>
     </section>
   );

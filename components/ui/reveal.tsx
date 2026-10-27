@@ -12,10 +12,10 @@ type RevealProps = {
 } & MotionProps;
 
 const offsets = {
-  up: { y: 40, x: 0 },
-  down: { y: -40, x: 0 },
-  left: { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
+  up: { y: 18, x: 0 },
+  down: { y: -18, x: 0 },
+  left: { x: 18, y: 0 },
+  right: { x: -18, y: 0 },
   none: { x: 0, y: 0 },
 };
 
@@ -34,7 +34,7 @@ export function Reveal({
       initial={{ opacity: 0, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       {...props}
     >
       {children}
@@ -78,7 +78,7 @@ export function StaggerItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 28 },
+        hidden: { opacity: 0, y: 14 },
         show: {
           opacity: 1,
           y: 0,

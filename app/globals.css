@@ -1,154 +1,121 @@
 @import "tailwindcss";
 
+/*
+ * Haniball Hunza palette — drawn from sun-dried apricots, walnut shells,
+ * orchard leaves and the pale stone of the Karakoram.
+ */
 :root {
-  --forest: #1f4d36;
-  --forest-dark: #163828;
-  --forest-light: #2a6b4a;
-  --honey: #d4a017;
-  --honey-dark: #b8860e;
-  --honey-light: #e4b52e;
-  --cream: #fff8ec;
-  --cream-dark: #f5ead6;
-  --charcoal: #222222;
-  --light-gray: #f6f6f6;
+  --ivory: #faf6ee;
+  --paper: #f3ede1;
+  --sand: #e6dac4;
+  --forest: #1f3d2b;
+  --forest-deep: #152b1e;
+  --forest-soft: #2c5139;
+  --sage: #8a9a7b;
+  --sage-light: #dfe5d6;
+  --bark: #6b4a32;
+  --apricot: #c9772b;
+  --apricot-deep: #9c5418;
+  --ink: #1d1d19;
+  --muted: #625e55;
+  --line: #e2d9c8;
+  --danger: #a33a2a;
   --white: #ffffff;
-  --background: var(--cream);
-  --foreground: var(--charcoal);
-  --muted: #6b6b6b;
-  --border: #e8e0d4;
-  --ring: var(--honey);
 }
 
 @theme inline {
+  --color-ivory: var(--ivory);
+  --color-paper: var(--paper);
+  --color-sand: var(--sand);
   --color-forest: var(--forest);
-  --color-forest-dark: var(--forest-dark);
-  --color-forest-light: var(--forest-light);
-  --color-honey: var(--honey);
-  --color-honey-dark: var(--honey-dark);
-  --color-honey-light: var(--honey-light);
-  --color-cream: var(--cream);
-  --color-cream-dark: var(--cream-dark);
-  --color-charcoal: var(--charcoal);
-  --color-light-gray: var(--light-gray);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-forest-deep: var(--forest-deep);
+  --color-forest-soft: var(--forest-soft);
+  --color-sage: var(--sage);
+  --color-sage-light: var(--sage-light);
+  --color-bark: var(--bark);
+  --color-apricot: var(--apricot);
+  --color-apricot-deep: var(--apricot-deep);
+  --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-ring: var(--ring);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
+
+  /* Legacy aliases kept so older markup keeps rendering on-palette */
+  --color-cream: var(--ivory);
+  --color-charcoal: var(--ink);
+  --color-honey: var(--apricot);
+  --color-border: var(--line);
+
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
-  --font-urdu: var(--font-noto-urdu);
+  --font-serif: var(--font-fraunces);
   --animate-accordion-down: accordion-down 0.25s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
+@layer base {
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--ivory);
+  color: var(--ink);
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-playfair), Georgia, serif;
-  letter-spacing: -0.02em;
+h4 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
 
-.font-urdu {
-  font-family: var(--font-urdu), "Noto Nastaliq Urdu", serif;
+p {
+  text-wrap: pretty;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--honey) 35%, transparent);
-  color: var(--charcoal);
+  background: color-mix(in srgb, var(--apricot) 30%, transparent);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--honey);
+  outline: 2px solid var(--apricot-deep);
   outline-offset: 3px;
 }
-
-.glass {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.glass-light {
-  background: rgba(255, 248, 236, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(31, 77, 54, 0.08);
+@layer components {
+/* Small uppercase label used above section headings */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--apricot-deep);
+}
 }
 
-.hero-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 48px 48px;
+/* Faint contour lines evoking mountain topography */
+.contours {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300' viewBox='0 0 600 300' fill='none' stroke='%23ffffff' stroke-opacity='0.07'%3E%3Cpath d='M0 220 L80 150 L130 185 L220 90 L300 170 L360 120 L440 190 L520 110 L600 170'/%3E%3Cpath d='M0 250 L80 185 L130 215 L220 130 L300 200 L360 155 L440 220 L520 145 L600 200'/%3E%3Cpath d='M0 280 L80 220 L130 245 L220 170 L300 230 L360 190 L440 250 L520 180 L600 230'/%3E%3C/svg%3E");
+  background-size: 600px 300px;
+  background-repeat: repeat-x;
+  background-position: bottom;
 }
 
-.masonry {
-  columns: 1;
-  column-gap: 1rem;
+.no-scrollbar {
+  scrollbar-width: none;
 }
-
-@media (min-width: 640px) {
-  .masonry {
-    columns: 2;
-  }
-}
-
-@media (min-width: 1024px) {
-  .masonry {
-    columns: 3;
-  }
-}
-
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 1rem;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-@keyframes scroll-pulse {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(6px);
-  }
-}
-
-.animate-scroll-indicator {
-  animation: scroll-pulse 2s ease-in-out infinite;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 @keyframes accordion-down {
@@ -169,22 +136,14 @@ h6 {
   }
 }
 
-.animate-accordion-down {
-  animation: accordion-down 0.25s ease-out;
-}
-
-.animate-accordion-up {
-  animation: accordion-up 0.2s ease-out;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
