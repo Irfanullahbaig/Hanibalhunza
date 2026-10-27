@@ -1,13 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Leaf, Mountain, Truck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const trust = [
-  { icon: Mountain, label: "Sourced from Hunza Valley" },
-  { icon: Leaf, label: "Sun-dried, no added sugar" },
-  { icon: Truck, label: "Delivery across Pakistan" },
-];
 
 export function HeroSection() {
   return (
@@ -37,14 +32,6 @@ export function HeroSection() {
               <Link href="/wholesale">Wholesale &amp; bulk orders</Link>
             </Button>
           </div>
-          <ul className="mt-10 grid gap-3 border-t border-line pt-6 text-[13px] text-muted sm:grid-cols-3 sm:gap-4 lg:grid-cols-1 2xl:grid-cols-3">
-            {trust.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-2">
-                <Icon className="h-4 w-4 shrink-0 text-sage" aria-hidden />
-                {label}
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div className="relative lg:col-span-6 xl:col-span-7">

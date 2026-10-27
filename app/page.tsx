@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/data";
 import { HeroSection } from "@/components/sections/hero";
+import { TrustBar } from "@/components/sections/trust-bar";
 import { CategoryTiles } from "@/components/sections/category-tiles";
 import { Bestsellers } from "@/components/sections/bestsellers";
 import { ShopByType } from "@/components/sections/shop-by-type";
@@ -35,6 +36,7 @@ export default function Page() {
     <>
       <JsonLd data={faqSchema} />
       <HeroSection />
+      <TrustBar />
       <CategoryTiles />
       <Bestsellers />
       <ShopByType />

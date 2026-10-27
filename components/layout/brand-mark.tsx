@@ -9,7 +9,7 @@ type BrandMarkProps = {
   light?: boolean;
 };
 
-function Peaks({ className }: { className?: string }) {
+export function Peaks({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 20" aria-hidden className={className} fill="none">
       <path
