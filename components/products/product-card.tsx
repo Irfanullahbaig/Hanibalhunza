@@ -1,109 +1,90 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, Star } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { Check, Plus } from "lucide-react";
 import type { Product } from "@/types";
-import { formatPrice, cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/data";
+import {
+  getDefaultVariant,
+  getDiscountPercent,
+  isProductInStock,
+} from "@/lib/data";
+import { cn } from "@/lib/utils";
+import { useCart } from "@/hooks/use-cart";
+import { ProductImage } from "@/components/products/product-image";
+import { Price } from "@/components/products/price";
 
 type ProductCardProps = {
   product: Product;
   className?: string;
+  priority?: boolean;
 };
 
-export function ProductCard({ product, className }: ProductCardProps) {
-  const message = encodeURIComponent(
-    `Hello Haniball Hunza! I'd like to order:\n\n• ${product.name} (${product.weight})\n• Price: ${formatPrice(product.price)}\n\nPlease confirm availability. Thank you!`
-  );
-  const whatsappHref = `https://wa.me/${siteConfig.whatsapp}?text=${message}`;
+export function ProductCard({ product, className, priority }: ProductCardProps) {
+  const { addItem } = useCart();
+  const [added, setAdded] = useState(false);
+  const variant = getDefaultVariant(product);
+  const inStock = isProductInStock(product);
+  const discount = getDiscountPercent(variant.price, variant.compareAtPrice);
+  const href = `/shop/${product.slug}`;
+
+  const onAdd = () => {
+    addItem(product.slug, variant.id, 1);
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1600);
+  };
 
   return (
-    <motion.article
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.3 }}
-      className={cn(
-        "group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-border/60 transition-shadow duration-300 hover:shadow-xl",
-        className
-      )}
-    >
-      {product.badge && (
-        <span className="absolute left-3 top-3 z-10 rounded-md bg-honey px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-charcoal">
-          {product.badge}
-        </span>
-      )}
-
-      <Link
-        href={`/shop/${product.slug}`}
-        className="relative aspect-[4/5] overflow-hidden bg-light-gray"
-      >
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+    <article className={cn("group flex flex-col", className)}>
+      <Link href={href} className="relative block overflow-hidden rounded-md" tabIndex={-1} aria-hidden>
+        <ProductImage
+          product={product}
+          priority={priority}
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          imageClassName="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
+        <div className="absolute left-2.5 top-2.5 flex flex-col items-start gap-1">
+          {!inStock && (
+            <span className="rounded-sm bg-ink/80 px-2 py-0.5 text-[11px] font-medium text-white">
+              Sold out
+            </span>
+          )}
+          {inStock && discount > 0 && (
+            <span className="rounded-sm bg-ivory px-2 py-0.5 text-[11px] font-medium text-apricot-deep">
+              −{discount}%
+            </span>
+          )}
+        </div>
       </Link>
 
-      <div className="flex flex-1 flex-col gap-2 p-5">
-        <div className="flex items-center gap-1 text-honey">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              className={cn(
-                "h-3.5 w-3.5",
-                i < Math.round(product.rating)
-                  ? "fill-honey text-honey"
-                  : "text-border"
-              )}
-            />
-          ))}
-          <span className="ml-1 text-xs text-muted">
-            ({product.reviewCount})
-          </span>
-        </div>
-
-        <Link href={`/shop/${product.slug}`}>
-          <h3 className="font-serif text-xl text-charcoal transition-colors hover:text-forest">
+      <div className="flex flex-1 flex-col pt-3.5">
+        <h3 className="font-serif text-[17px] leading-snug text-ink sm:text-lg">
+          <Link href={href} className="transition-colors hover:text-forest">
             {product.name}
-          </h3>
-        </Link>
-
-        <p className="line-clamp-2 text-sm text-muted">
-          {product.shortDescription}
+          </Link>
+        </h3>
+        <p className="mt-1 text-[13px] text-muted">
+          {product.variants.map((v) => v.label).join(" · ")}
         </p>
-
-        <p className="text-xs uppercase tracking-wider text-forest/70">
-          {product.weight}
-        </p>
-
-        <div className="mt-auto flex items-end justify-between gap-3 pt-3">
-          <div className="flex items-baseline gap-2">
-            <span className="text-lg font-semibold text-forest">
-              {formatPrice(product.price)}
-            </span>
-            {product.compareAtPrice && (
-              <span className="text-sm text-muted line-through">
-                {formatPrice(product.compareAtPrice)}
-              </span>
+        <div className="mt-auto flex items-end justify-between gap-2 pt-3">
+          <Price price={variant.price} compareAtPrice={variant.compareAtPrice} size="sm" />
+          <button
+            type="button"
+            onClick={onAdd}
+            disabled={!inStock}
+            aria-label={inStock ? `Add ${product.name} (${variant.label}) to cart` : `${product.name} is sold out`}
+            className={cn(
+              "inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md border px-3 text-[13px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40",
+              added
+                ? "border-forest bg-forest text-ivory"
+                : "border-forest/25 text-forest hover:border-forest hover:bg-forest hover:text-ivory"
             )}
-          </div>
-          <Button asChild size="sm" variant="forest">
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Order ${product.name} on WhatsApp`}
-            >
-              <MessageCircle className="h-4 w-4" />
-              Order Now
-            </a>
-          </Button>
+          >
+            {added ? <Check className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+            <span className="hidden min-[400px]:inline">{added ? "Added" : "Add"}</span>
+          </button>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

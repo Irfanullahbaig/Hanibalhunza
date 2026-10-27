@@ -1,22 +1,28 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { MessageCircle } from "lucide-react";
-import { siteConfig } from "@/lib/data";
+import { whatsappLink } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 export function WhatsAppFloat() {
-  const href = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
-      "Hello Haniball Hunza! I'd like to order dry fruits."
-  )}`;
+  const pathname = usePathname();
+  // Hidden where a purchase bar or form already owns the bottom of the screen.
+  if (pathname === "/checkout" || pathname === "/cart") return null;
+  const raised = pathname.startsWith("/shop/");
 
   return (
     <a
-      href={href}
+      href={whatsappLink("Hello Haniball Hunza! I have a question about your products.")}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
-      className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition hover:scale-110 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-honey"
+      aria-label="Chat with us on WhatsApp"
+      className={cn(
+        "fixed right-4 z-30 flex h-12 w-12 items-center justify-center rounded-full bg-forest text-ivory shadow-lg shadow-forest/20 transition-transform hover:-translate-y-0.5 sm:right-6",
+        raised ? "bottom-24 lg:bottom-6" : "bottom-5 sm:bottom-6"
+      )}
     >
-      <MessageCircle className="h-7 w-7" fill="currentColor" />
+      <MessageCircle className="h-5 w-5" />
     </a>
   );
 }

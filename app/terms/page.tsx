@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <section className="bg-cream pb-20 pt-32">
+    <section className="bg-ivory pb-20 pt-12">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted">
           <Link href="/" className="hover:text-forest">
@@ -18,7 +18,7 @@ export default function TermsPage() {
           <span className="mx-2">/</span>
           <span>Terms of Service</span>
         </nav>
-        <h1 className="font-serif text-4xl text-charcoal">Terms of Service</h1>
+        <h1 className="font-serif text-4xl text-ink">Terms of Service</h1>
         <p className="mt-6 leading-relaxed text-muted">
           By using {siteConfig.name} websites and services, you agree to provide
           accurate order information and to use our products as intended. Prices,

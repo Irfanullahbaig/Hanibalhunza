@@ -1,18 +1,10 @@
-import type {
-  Category,
-  FAQ,
-  Feature,
-  GalleryImage,
-  NavItem,
-  Product,
-  Testimonial,
-} from "@/types";
+import type { Category, FAQ, NavItem, Product, Testimonial } from "@/types";
 
 export const siteConfig = {
   name: "Haniball Hunza",
-  tagline: "Premium Dry Fruits from the Mountains of Hunza",
+  tagline: "Dried Fruits & Nuts from the Valleys of Hunza",
   description:
-    "Premium organic dry fruits, Hunzai chocolate, and Hunza organic shilajit—sourced from the pristine valleys of Hunza for authentic taste, purity, and wellness.",
+    "Sun-dried apricots, almonds, walnuts, Hunzai chocolate and organic shilajit from Hunza Valley—for everyday snacking, gifting and wholesale supply across Pakistan.",
   url: "https://haniballhunza.com",
   phone: "+92 3555380038",
   whatsapp: "923555380038",
@@ -24,251 +16,277 @@ export const siteConfig = {
   },
 };
 
+/**
+ * Commerce settings. Values left null are not yet confirmed by the business
+ * and are shown to customers as "confirmed with your order" rather than
+ * guessed. Fill them in to show them on the cart and checkout.
+ */
+export const commerceConfig = {
+  currency: "PKR",
+  /** Flat delivery charge in PKR, or null when quoted per order */
+  shippingFlatRate: null as number | null,
+  /** Order subtotal (PKR) above which delivery is free, or null */
+  freeShippingThreshold: null as number | null,
+  /** e.g. ["Cash on delivery", "Bank transfer"]. Empty = confirmed on WhatsApp */
+  paymentMethods: [] as string[],
+  deliveryEstimate:
+    "2–4 business days to major cities, 4–7 business days to remote areas.",
+  deliveryCoverage: "Nationwide delivery across Pakistan",
+  maxQuantityPerLine: 50,
+};
+
+/**
+ * Wholesale programme settings. Nothing here is invented: everything not yet
+ * confirmed is null/empty and the site says it is quoted per inquiry.
+ */
+export const wholesaleConfig = {
+  /** Generic minimum order text, e.g. "From 10 kg per product". null = per quote */
+  minimumOrder: null as string | null,
+  /** Volume discount tiers. Empty = quoted per inquiry */
+  volumePricing: [] as { from: string; discount: string }[],
+  /** Set true once custom packaging / private label is offered */
+  privateLabel: null as boolean | null,
+  /** Dedicated wholesale email, if one exists */
+  email: null as string | null,
+  businessTypes: [
+    "Retail store",
+    "Supermarket / chain",
+    "Distributor / wholesaler",
+    "Restaurant / café",
+    "Hotel / hospitality",
+    "Corporate gifting",
+    "Exporter / importer",
+    "Other",
+  ],
+};
+
 export const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/shop" },
-  { label: "Categories", href: "/categories" },
-  { label: "About", href: "/about" },
-  { label: "Our Products", href: "/our-honey" },
-  { label: "Reviews", href: "/reviews" },
+  { label: "Wholesale", href: "/wholesale" },
+  { label: "Our Story", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
 export const categories: Category[] = [
   {
-    id: "1",
-    slug: "dry-apricots",
-    name: "Dry Apricots",
-    description: "100% organic Hunza apricots — sun-dried & naturally sweet",
-    image: "/images/dry-apricot.png",
+    slug: "dried-fruits",
+    name: "Dried Fruits",
+    description: "Sun-dried Hunza apricots and mountain blends",
+    image: "/images/products/dry-apricot.jpg",
   },
   {
-    id: "2",
-    slug: "dry-almonds",
-    name: "Dry Almonds",
-    description: "100% organic Hunza almonds — pure, crunchy & nutrient-rich",
-    image: "/images/dry-almond.jpg",
+    slug: "nuts",
+    name: "Nuts & Kernels",
+    description: "Hunza almonds and Omega-3 rich walnut kernels",
+    image: "/images/products/dry-almond.jpg",
   },
   {
-    id: "3",
-    slug: "hunzai-chocolate",
-    name: "Hunzai Chocolate",
-    description: "Premium walnuts dipped in natural grape syrup — Kilawo",
-    image: "/images/hunzai-chocolate.png",
+    slug: "hunza-specialties",
+    name: "Hunza Specialties",
+    description: "Kilawo walnut chocolate and organic shilajit",
+    image: "/images/products/kilawo.jpg",
   },
   {
-    id: "4",
-    slug: "shilajit",
-    name: "Organic Shilajit",
-    description: "Pure Hunza shilajit for strength and vitality",
-    image:
-      "/images/hunza-shilajit.png",
-  },
-  {
-    id: "5",
-    slug: "gift-boxes",
-    name: "Gift Boxes",
-    description: "Curated dry fruit & wellness gift sets",
-    image:
-      "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&q=80",
+    slug: "gift-sets",
+    name: "Gift Sets",
+    description: "Curated boxes for Eid, family and corporate gifting",
+    image: "/images/products/mix-dry-fruits.jpg",
   },
 ];
+
+const DRY_STORAGE =
+  "Keep in an airtight container in a cool, dry place away from sunlight. Refrigerate in humid weather.";
+const HUNZA_ORIGIN = "Hunza Valley, Gilgit-Baltistan, Pakistan";
 
 export const products: Product[] = [
   {
     id: "1",
     slug: "dry-apricot",
-    name: "Dry Apricot",
-    shortDescription: "100% organic Hunza apricots, sun-dried & naturally sweet",
+    name: "Hunza Dried Apricots",
+    shortDescription: "Sun-dried, naturally sweet apricots with no added sugar",
     description:
-      "Unlock the golden secret of the Himalayas. 100% organic Hunza dried apricots—sun-dried, naturally sweet, and packed with goodness. Chemical-free with no added sugar. Rich in Vitamin A, iron, fiber, and vitamins; supports digestion and natural energy. Pure Hunza origin, perfect for everyone.",
-    price: 1899,
-    compareAtPrice: 2299,
-    weight: "500g",
-    rating: 4.9,
-    reviewCount: 142,
-    image: "/images/dry-apricot.png",
-    category: "dry-apricots",
-    badge: "Bestseller",
+      "Hunza's best-known harvest. Our apricots are sun-dried in the high valleys and packed without added sugar or chemical treatment, keeping their natural sweetness and deep amber colour. Rich in vitamin A, iron and fibre—an easy snack for the whole family.",
+    category: "dried-fruits",
+    image: "/images/products/dry-apricot.jpg",
+    gallery: ["/images/dry-apricot.png"],
+    variants: [
+      { id: "500g", label: "500 g", price: 1899, compareAtPrice: 2299, inStock: true },
+    ],
+    highlights: ["Sun-dried", "No added sugar", "Chemical-free"],
+    ingredients: "Sun-dried apricots.",
+    origin: HUNZA_ORIGIN,
+    storage: DRY_STORAGE,
     featured: true,
     bestseller: true,
-    inStock: true,
+    addedOrder: 1,
+    wholesale: { available: true, bulkFormats: [], moq: null },
+  },
+  {
+    id: "3",
+    slug: "dry-almond",
+    name: "Hunza Almonds",
+    shortDescription: "Crunchy, nutrient-rich almonds from Hunza orchards",
+    description:
+      "Crisp, sweet almonds grown in the mountain climate of Hunza. Naturally rich in vitamin E, magnesium, protein and healthy fats, with no added preservatives. Enjoy them raw, soaked overnight or in your baking.",
+    category: "nuts",
+    image: "/images/products/dry-almond.jpg",
+    gallery: ["/images/dry-almond.jpg"],
+    variants: [
+      { id: "500g", label: "500 g", price: 2199, compareAtPrice: 2599, inStock: true },
+    ],
+    highlights: ["Rich in vitamin E", "No preservatives", "Hand-sorted"],
+    ingredients: "Almonds.",
+    allergens: "Contains tree nuts (almonds).",
+    origin: HUNZA_ORIGIN,
+    storage: DRY_STORAGE,
+    featured: true,
+    bestseller: true,
+    addedOrder: 3,
+    wholesale: { available: true, bulkFormats: [], moq: null },
+  },
+  {
+    id: "7",
+    slug: "premium-walnut-kernels",
+    name: "Hunza Walnut Kernels",
+    shortDescription: "Premium kernels rich in Omega-3",
+    description:
+      "Light, buttery walnut kernels from Hunza, rich in Omega-3 fatty acids. Packed without preservatives and ideal for snacking, breakfast bowls and baking.",
+    category: "nuts",
+    image: "/images/products/walnuts.jpg",
+    gallery: ["/images/hunza-walnuts.jpg"],
+    variants: [
+      { id: "500g", label: "500 g", price: 2399, compareAtPrice: 2799, inStock: true },
+    ],
+    highlights: ["Rich in Omega-3", "No preservatives", "Premium kernels"],
+    ingredients: "Walnut kernels.",
+    allergens: "Contains tree nuts (walnuts).",
+    origin: HUNZA_ORIGIN,
+    storage: DRY_STORAGE,
+    featured: true,
+    bestseller: true,
+    addedOrder: 7,
+    wholesale: { available: true, bulkFormats: [], moq: null },
+  },
+  {
+    id: "6",
+    slug: "mixed-mountain-dry-fruits",
+    name: "Mountain Mix",
+    shortDescription: "Almonds, apricots, walnuts, cashews and raisins",
+    description:
+      "A balanced everyday blend of almonds, dried apricots, walnuts, cashews and raisins. No added sugar and no chemical treatment—just a handful of natural energy for work, school or travel.",
+    category: "dried-fruits",
+    image: "/images/products/mix-dry-fruits.jpg",
+    gallery: ["/images/mix-dry-fruits.jpg"],
+    variants: [
+      { id: "750g", label: "750 g", price: 2799, compareAtPrice: 3299, inStock: true },
+    ],
+    highlights: ["Five-fruit blend", "No added sugar", "Family size"],
+    ingredients: "Almonds, dried apricots, walnuts, cashews, raisins.",
+    allergens: "Contains tree nuts (almonds, walnuts, cashews).",
+    storage: DRY_STORAGE,
+    featured: true,
+    bestseller: true,
+    addedOrder: 6,
+    wholesale: { available: true, bulkFormats: [], moq: null },
   },
   {
     id: "2",
     slug: "hunzai-chocolate",
     name: "Hunzai Chocolate (Kilawo)",
-    shortDescription: "Premium walnuts dipped in natural grape syrup",
+    shortDescription: "Walnuts set in natural grape syrup—a Hunza tradition",
     description:
-      "A tradition. A taste of Hunza. Premium walnuts dipped in natural grape syrup—Kilawo is a rich, authentic delight from the heart of Hunza. 100% natural, made with premium walnuts, and an authentic Hunza product. Pure. Natural. Irresistible.",
-    price: 2499,
-    compareAtPrice: 2899,
-    weight: "250g",
-    rating: 4.8,
-    reviewCount: 96,
-    image: "/images/hunzai-chocolate.png",
-    category: "hunzai-chocolate",
-    badge: "New",
+      "Kilawo is a traditional Hunza sweet: whole walnuts coated and set in natural grape syrup. Rich, chewy and only lightly sweet, it is made the way families in the valley have made it for generations.",
+    category: "hunza-specialties",
+    image: "/images/products/kilawo.jpg",
+    gallery: ["/images/hunzai-chocolate.png"],
+    variants: [
+      { id: "250g", label: "250 g", price: 2499, compareAtPrice: 2899, inStock: true },
+    ],
+    highlights: ["Traditional recipe", "Natural grape syrup", "100% natural"],
+    ingredients: "Walnuts, natural grape syrup.",
+    allergens: "Contains tree nuts (walnuts).",
+    origin: HUNZA_ORIGIN,
+    storage: "Store sealed in a cool, dry place. Refrigerate after opening in warm weather.",
     featured: true,
     bestseller: true,
-    inStock: true,
-  },
-  {
-    id: "3",
-    slug: "dry-almond",
-    name: "Dry Almond",
-    shortDescription: "100% organic Hunza almonds — pure, crunchy & nutrient-rich",
-    description:
-      "Unlock the golden secret of the Himalayas. 100% organic Hunza almonds—pure, crunchy, and nutrient-rich. Chemical-free with no added sugar. Rich in Vitamin E, magnesium, protein, fiber, and healthy fats. Heart-healthy, brain-boosting natural energy from the pristine valleys of Hunza.",
-    price: 2199,
-    compareAtPrice: 2599,
-    weight: "500g",
-    rating: 4.9,
-    reviewCount: 118,
-    image: "/images/dry-almond.jpg",
-    category: "dry-almonds",
-    badge: "20% OFF",
-    featured: true,
-    bestseller: true,
-    inStock: true,
+    addedOrder: 2,
+    wholesale: { available: true, bulkFormats: [], moq: null },
   },
   {
     id: "4",
     slug: "hunza-organic-shilajit",
     name: "Hunza Organic Shilajit",
-    shortDescription: "Pure organic shilajit from Hunza highlands",
+    shortDescription: "Purified mountain shilajit resin",
     description:
-      "Hunza Organic Shilajit is carefully collected and purified for authenticity and potency. Lab-tested, 100% pure & natural—rich in essential minerals to boost energy, stamina, immunity, and wellness. A small dose for a stronger, better you.",
-    price: 4499,
-    compareAtPrice: 4999,
-    weight: "30g",
-    rating: 5.0,
-    reviewCount: 74,
-    image: "/images/hunza-shilajit.png",
-    category: "shilajit",
-    badge: "Premium",
+      "Collected in the Hunza highlands and carefully purified, our shilajit is a mineral-rich resin traditionally taken in small daily amounts. Follow the label for serving guidance and consult your doctor if you are pregnant, nursing or taking medication.",
+    category: "hunza-specialties",
+    image: "/images/products/shilajit.jpg",
+    gallery: ["/images/hunza-shilajit.png"],
+    variants: [
+      { id: "30g", label: "30 g", price: 4499, compareAtPrice: 4999, inStock: true },
+    ],
+    highlights: ["Purified resin", "Mineral-rich", "Small daily serving"],
+    ingredients: "Purified shilajit resin.",
+    origin: HUNZA_ORIGIN,
+    storage: "Keep the jar tightly closed in a cool, dry place away from direct sunlight.",
     featured: true,
-    bestseller: true,
-    inStock: true,
+    bestseller: false,
+    addedOrder: 4,
+    wholesale: { available: true, bulkFormats: [], moq: null },
   },
   {
     id: "5",
     slug: "hunza-dry-fruit-gift-box",
     name: "Hunza Dry Fruit Gift Box",
-    shortDescription: "Apricots, almonds & treats in a premium set",
+    shortDescription: "Apricots, almonds and Kilawo in one gift set",
     description:
-      "A curated gift box featuring Dry Apricot, Dry Almond, and Hunzai Chocolate—beautifully packed for Eid, corporate gifting, and celebrations.",
-    price: 5999,
-    compareAtPrice: 6999,
-    weight: "Assorted",
-    rating: 4.9,
-    reviewCount: 52,
-    image:
-      "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&q=80",
-    category: "gift-boxes",
-    badge: "Gift",
+      "A curated gift box with Hunza Dried Apricots, Hunza Almonds and Hunzai Chocolate—packed for Eid, weddings, family visits and corporate gifting.",
+    category: "gift-sets",
+    image: "/images/products/mix-dry-fruits.jpg",
+    gallery: [],
+    variants: [
+      { id: "assorted", label: "Assorted set", price: 5999, compareAtPrice: 6999, inStock: true },
+    ],
+    highlights: ["Ready to gift", "Three Hunza favourites"],
+    ingredients: "Dried apricots, almonds, walnuts, natural grape syrup.",
+    allergens: "Contains tree nuts (almonds, walnuts).",
+    storage: DRY_STORAGE,
     featured: true,
     bestseller: false,
-    inStock: true,
-  },
-  {
-    id: "6",
-    slug: "mixed-mountain-dry-fruits",
-    name: "Mix Dry Fruits",
-    shortDescription: "Almond, apricot, walnut, cashew & raisin — nature’s best blend",
-    description:
-      "Unlock the golden secret of the Himalayas. 100% organic mix dry fruits—almond, apricot, walnut, cashew, and raisin. No added sugar, chemical-free, and rich in nutrients. A perfect blend packed with vitamins, minerals, natural energy, and brain-supporting goodness for the whole family.",
-    price: 2799,
-    compareAtPrice: 3299,
-    weight: "750g",
-    rating: 4.7,
-    reviewCount: 63,
-    image: "/images/mix-dry-fruits.jpg",
-    category: "dry-apricots",
-    badge: "Bestseller",
-    featured: true,
-    bestseller: true,
-    inStock: true,
-  },
-  {
-    id: "7",
-    slug: "premium-walnut-kernels",
-    name: "Hunza Walnuts",
-    shortDescription: "100% organic premium kernels — rich in Omega-3",
-    description:
-      "Unlock the golden secret of the Himalayas. 100% organic Hunza walnuts—premium kernels rich in Omega-3. Pure, crunchy, and nutrient-rich with no added preservatives. Supports brain health, heart health, memory, and focus. A nutritious snack for kids, adults, and the whole family.",
-    price: 2399,
-    compareAtPrice: 2799,
-    weight: "500g",
-    rating: 4.8,
-    reviewCount: 81,
-    image: "/images/hunza-walnuts.jpg",
-    category: "dry-almonds",
-    badge: "Premium",
-    featured: true,
-    bestseller: true,
-    inStock: true,
+    addedOrder: 5,
+    wholesale: { available: true, bulkFormats: [], moq: null },
+    placeholderImage: true,
   },
   {
     id: "8",
     slug: "shilajit-wellness-set",
     name: "Shilajit Wellness Set",
-    shortDescription: "Organic shilajit with dry fruit companions",
+    shortDescription: "Organic shilajit paired with Hunza dry fruits",
     description:
-      "Pair Hunza Organic Shilajit with a selection of dry fruits for a complete wellness gift—rooted in mountain tradition.",
-    price: 6999,
-    compareAtPrice: 7999,
-    weight: "Set",
-    rating: 4.9,
-    reviewCount: 28,
-    image: "/images/hunza-shilajit.png",
-    category: "shilajit",
-    badge: "Limited",
+      "Hunza Organic Shilajit paired with a selection of our dry fruits—a thoughtful wellness gift rooted in mountain tradition.",
+    category: "gift-sets",
+    image: "/images/products/shilajit.jpg",
+    gallery: [],
+    variants: [
+      { id: "set", label: "Gift set", price: 6999, compareAtPrice: 7999, inStock: true },
+    ],
+    highlights: ["Gift ready", "Limited quantities"],
+    allergens: "Dry fruit selection may contain tree nuts.",
+    storage: DRY_STORAGE,
     featured: false,
     bestseller: false,
-    inStock: true,
+    addedOrder: 8,
+    wholesale: { available: true, bulkFormats: [], moq: null },
+    placeholderImage: true,
   },
 ];
 
-export const features: Feature[] = [
-  {
-    id: "1",
-    title: "100% Natural",
-    description: "Clean dry fruits and wellness products with no unnecessary additives.",
-    icon: "Droplets",
-  },
-  {
-    id: "2",
-    title: "No Artificial Sugar",
-    description: "Naturally sweet apricots and snacks—never syrup-coated fillers.",
-    icon: "Ban",
-  },
-  {
-    id: "3",
-    title: "Lab Tested",
-    description: "Shilajit and key products verified for purity and authenticity.",
-    icon: "FlaskConical",
-  },
-  {
-    id: "4",
-    title: "Sustainably Sourced",
-    description: "Ethical sourcing that supports mountain farming communities.",
-    icon: "Leaf",
-  },
-  {
-    id: "5",
-    title: "Direct From Hunza",
-    description: "Sourced at origin from trusted Hunza growers and partners.",
-    icon: "Mountain",
-  },
-  {
-    id: "6",
-    title: "Fast Nationwide Delivery",
-    description: "Secure packaging and swift delivery across Pakistan.",
-    icon: "Truck",
-  },
-];
-
+/**
+ * These reviews came with the original site template and could not be
+ * confirmed as genuine. They are kept for reference but hidden until each one
+ * is verified (set `verified: true`).
+ */
 export const testimonials: Testimonial[] = [
   {
     id: "1",
@@ -276,9 +294,8 @@ export const testimonials: Testimonial[] = [
     city: "Islamabad",
     rating: 5,
     review:
-      "The Dry Apricots taste exactly like the ones from the north—soft, sweet, and pure. Haniball Hunza is now our go-to for dry fruits.",
-    photo:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
+      "The Dry Apricots taste exactly like the ones from the north—soft, sweet, and pure.",
+    verified: false,
   },
   {
     id: "2",
@@ -286,9 +303,8 @@ export const testimonials: Testimonial[] = [
     city: "Karachi",
     rating: 5,
     review:
-      "Packaging is elegant, delivery was prompt, and the Hunzai Chocolate is exceptional. You can tell this brand cares about quality.",
-    photo:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
+      "Packaging is elegant, delivery was prompt, and the Hunzai Chocolate is exceptional.",
+    verified: false,
   },
   {
     id: "3",
@@ -296,147 +312,89 @@ export const testimonials: Testimonial[] = [
     city: "Lahore",
     rating: 5,
     review:
-      "I gifted the Dry Fruit Gift Box for Eid and it was a showstopper. Beautiful presentation and premium products throughout.",
-    photo:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80",
-  },
-  {
-    id: "4",
-    name: "Hassan Ali",
-    city: "Peshawar",
-    rating: 4,
-    review:
-      "As someone from the north, I'm picky about dry almonds. These are fresh, crunchy, and carefully packed—highly recommend.",
-    photo:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80",
-  },
-  {
-    id: "5",
-    name: "Sara Malik",
-    city: "Rawalpindi",
-    rating: 5,
-    review:
-      "Hunza Organic Shilajit feels authentic and well-purified. Combined with their dry fruits, it's a complete wellness pantry.",
-    photo:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80",
+      "I gifted the Dry Fruit Gift Box for Eid and it was a showstopper.",
+    verified: false,
   },
 ];
 
 export const faqs: FAQ[] = [
   {
     id: "1",
-    question: "How long does shipping take?",
+    question: "How long does delivery take?",
     answer:
-      "Orders within major cities typically arrive in 2–4 business days. Remote areas may take 4–7 business days. You'll receive tracking details as soon as your order ships.",
-    category: "shipping",
+      "Orders to major cities typically arrive in 2–4 business days; remote areas may take 4–7 business days. We share tracking details once your order ships.",
   },
   {
     id: "2",
-    question: "Are your dry fruits 100% natural?",
+    question: "How do I place and pay for an order?",
     answer:
-      "Yes. Haniball Hunza dry fruits are carefully selected for purity and quality. We do not use artificial colors or unnecessary additives. Shilajit is organic and lab-checked for authenticity.",
-    category: "purity",
+      "Add products to your cart and check out with your delivery details. We then confirm your order, delivery charge and payment options with you on WhatsApp before dispatch.",
   },
   {
     id: "3",
-    question: "How should I store dry fruits and shilajit?",
+    question: "Are your dry fruits natural?",
     answer:
-      "Keep dry fruits in an airtight container in a cool, dry place away from sunlight. Refrigerate in humid climates. Store shilajit sealed, cool, and dry—follow the label for daily use guidance.",
-    category: "storage",
+      "Yes. Our apricots are sun-dried without added sugar, and our nuts are packed without artificial colours or preservatives.",
   },
   {
     id: "4",
-    question: "What is your return policy?",
+    question: "How should I store dry fruits?",
     answer:
-      "If your order arrives damaged or incorrect, contact us within 7 days with photos and we'll arrange a replacement or refund. Opened food products cannot be returned for hygiene reasons unless defective.",
-    category: "returns",
+      "Keep them in an airtight container in a cool, dry place away from sunlight, and refrigerate in humid weather.",
   },
   {
     id: "5",
-    question: "Do you deliver nationwide?",
+    question: "Do you supply businesses in bulk?",
     answer:
-      "Yes. We deliver across Pakistan via trusted courier partners. International shipping is available on select products—reach out via WhatsApp for a custom quote.",
-    category: "delivery",
+      "Yes. Retailers, distributors, restaurants, hotels and corporate buyers can request a wholesale quote. Quantities, packaging and pricing are confirmed per inquiry.",
   },
   {
     id: "6",
-    question: "Can I order on WhatsApp?",
+    question: "What if my order arrives damaged?",
     answer:
-      "Absolutely. Message us on WhatsApp for personalized recommendations, gift wrapping, or bulk orders. Our team typically responds within a few hours during business days.",
-    category: "delivery",
+      "Contact us within 7 days with photos and we'll arrange a replacement or refund. Opened food products can't be returned for hygiene reasons unless defective.",
   },
-];
-
-export const galleryImages: GalleryImage[] = [
-  {
-    id: "1",
-    src: "/images/hunza-shilajit.png",
-    alt: "Haniball Hunza Organic Shilajit product",
-    span: "tall",
-  },
-  {
-    id: "2",
-    src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
-    alt: "Hunza mountain landscape at sunrise",
-    span: "wide",
-  },
-  {
-    id: "3",
-    src: "/images/dry-almond.jpg",
-    alt: "Haniball Hunza dried almonds — 100% organic pouch",
-    span: "normal",
-  },
-  {
-    id: "4",
-    src: "/images/hunzai-chocolate.png",
-    alt: "Hunzai Chocolate Kilawo — walnuts in grape syrup",
-    span: "normal",
-  },
-  {
-    id: "5",
-    src: "/images/mix-dry-fruits.jpg",
-    alt: "Haniball Hunza 100% organic mix dry fruits",
-    span: "tall",
-  },
-  {
-    id: "6",
-    src: "/images/hunza-walnuts.jpg",
-    alt: "Haniball Hunza organic walnuts — premium Omega-3 kernels",
-    span: "normal",
-  },
-  {
-    id: "7",
-    src: "/images/hunza-valley.jpg",
-    alt: "Hunza Valley mountain landscape with evergreen forests",
-    span: "wide",
-  },
-  {
-    id: "8",
-    src: "/images/dry-apricot.png",
-    alt: "Haniball Hunza dried apricots — sun-dried organic pouch",
-    span: "normal",
-  },
-];
-
-export const stats = [
-  { id: "1", label: "Happy Customers", value: 12000, suffix: "+" },
-  { id: "2", label: "Years of Experience", value: 15, suffix: "+" },
-  { id: "3", label: "Dry Fruits Sold (kg)", value: 38000, suffix: "+" },
-  { id: "4", label: "Customer Rating", value: 4.9, suffix: "★", decimals: 1 },
 ];
 
 export function getProductBySlug(slug: string) {
   return products.find((p) => p.slug === slug);
 }
 
-export function getProductsByCategory(categorySlug: string) {
-  return products.filter((p) => p.category === categorySlug);
+export function getProductsByCategory(category: string) {
+  return products.filter((p) => p.category === category);
 }
 
-export function getFeaturedProducts() {
-  return products.filter((p) => p.featured);
+export function getCategory(slug: string) {
+  return categories.find((c) => c.slug === slug);
 }
 
 export function getBestsellers() {
   return products.filter((p) => p.bestseller);
+}
+
+export function getVariant(product: Product, variantId: string) {
+  return product.variants.find((v) => v.id === variantId);
+}
+
+export function getDefaultVariant(product: Product) {
+  return product.variants.find((v) => v.inStock) ?? product.variants[0];
+}
+
+export function isProductInStock(product: Product) {
+  return product.variants.some((v) => v.inStock);
+}
+
+/** Lowest available retail price, used for listing and sorting */
+export function getFromPrice(product: Product) {
+  return Math.min(...product.variants.map((v) => v.price));
+}
+
+export function getDiscountPercent(price: number, compareAtPrice?: number) {
+  if (!compareAtPrice || compareAtPrice <= price) return 0;
+  return Math.round(((compareAtPrice - price) / compareAtPrice) * 100);
+}
+
+export function whatsappLink(message?: string) {
+  const base = `https://wa.me/${siteConfig.whatsapp}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }

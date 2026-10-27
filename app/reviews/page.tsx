@@ -1,35 +1,44 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Testimonials } from "@/components/sections/testimonials";
-import { Newsletter } from "@/components/sections/newsletter";
+import { whatsappLink } from "@/lib/data";
+import { PageHeader } from "@/components/ui/page-header";
+import { Button } from "@/components/ui/button";
+import { Testimonials, verifiedTestimonials } from "@/components/sections/testimonials";
 
 export const metadata: Metadata = {
-  title: "Reviews",
-  description:
-    "Read customer reviews of Haniball Hunza dry fruits and wellness products from across Pakistan.",
+  title: "Customer Reviews",
+  description: "Reviews from Haniball Hunza customers.",
   alternates: { canonical: "/reviews" },
 };
 
 export default function ReviewsPage() {
   return (
     <>
-      <section className="bg-forest pb-12 pt-32 text-cream">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav aria-label="Breadcrumb" className="mb-6 text-sm text-cream/60">
-            <Link href="/" className="hover:text-honey">
-              Home
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="text-honey">Reviews</span>
-          </nav>
-          <h1 className="font-serif text-4xl sm:text-5xl">Customer Reviews</h1>
-          <p className="mt-4 max-w-xl text-cream/70">
-            Real stories from people who taste the mountains in every spoonful.
+      <PageHeader crumbs={[{ label: "Home", href: "/" }, { label: "Reviews" }]} title="Customer reviews" />
+      {verifiedTestimonials.length > 0 ? (
+        <Testimonials />
+      ) : (
+        <section className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6">
+          <p className="font-serif text-2xl text-ink">We&rsquo;re collecting reviews from verified customers.</p>
+          <p className="mt-3 text-muted">
+            Ordered from us? We&rsquo;d love to hear how you found it.
           </p>
-        </div>
-      </section>
-      <Testimonials />
-      <Newsletter />
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Button asChild>
+              <a
+                href={whatsappLink("Hello Haniball Hunza! I'd like to share a review of my order.")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Share your review
+              </a>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/shop">Shop products</Link>
+            </Button>
+          </div>
+        </section>
+      )}
     </>
   );
 }
